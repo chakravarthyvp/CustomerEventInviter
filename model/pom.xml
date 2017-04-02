@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+	  <groupId>io.varaga.apps.events</groupId>
+	  <artifactId>customer-event-inviter</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<packaging>jar</packaging>
+
+  	<artifactId>model</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+	<name>Model for events, users</name>
+
+        <properties>
+    	   <generated.pojos>${basedir}/target/generated-sources/model/</generated.pojos>
+    	   <version.java>1.7</version.java>
+	</properties>
+
+	<dependencies>
+		<dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>${version.java}</source>
+					<target>${version.java}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+    			<groupId>org.jsonschema2pojo</groupId>
+    			<artifactId>jsonschema2pojo-maven-plugin</artifactId>
+    			<version>0.4.23</version>
+    			<configuration>
+        			<sourceDirectory>${basedir}/src/main/resources/json-schema</sourceDirectory>
+        			<targetDirectory>${basedir}/target/generated-sources/model/</targetDirectory>
+        			<targetPackage>io.apps.events.model</targetPackage>
+    			</configuration>
+    			<executions>
+        			<execution>
+            			<goals>
+                			<goal>generate</goal>
+            			</goals>
+        			</execution>
+    			</executions>
+		</plugin>
+    </plugins>
+  </build>
+
+</project>

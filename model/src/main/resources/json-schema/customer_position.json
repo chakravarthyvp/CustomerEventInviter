@@ -1,0 +1,24 @@
+{
+
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"description": "schema for customer events",
+        "required": ["customer_position_info"],
+        "properties": {
+                "customer_position_info": {
+                        "$ref": "#/definitions/customer_position_info"
+                }
+        },
+
+	"definitions": {
+		"customer_position_info":{
+                        "type": "object",
+			"required": ["user_id","name","position", "latitude", "longitude"],
+			"properties": {
+			   "user_id": {"type": "integer"},
+			   "name": {"type": "string"},
+			   "latitude": {"type": "number"},
+			   "longitude":{"type": "number"}
+			}
+		}
+	}
+}
