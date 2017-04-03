@@ -28,8 +28,10 @@ public final class GeoUtils {
          * roughly gets a bound for the co-ordinates within 100 km for the given lat/long the character precision determines the bounding box. 7 -
          * roughly upto 110 meters - 35 bits 6 - roughly upto 1.2 km - 30 bits 5 - roughly upto 7 kms - 25 bits 3 - roughly upto 220 kms 2 - roughly
          * 1000 km
+         * 
+         * Currently hardcoded to get for 100 KM bound, should refactor
          */
-
+    	
         return GeoHash.geoHashStringWithCharacterPrecision(latitude, longitude, 3);
     }
 

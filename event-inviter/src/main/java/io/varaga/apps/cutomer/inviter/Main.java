@@ -23,7 +23,7 @@ public class Main {
     public static void main(final String... args) throws JsonSyntaxException, IOException {
         //return sorted customers who need to be invited
         final Set<CustomerPositionInfo> invitedCustomers = new CustomerInviter(args).getCustomersWithinProximity(true);
-        logger.info("Following Customers are invited for Lunch: {}", invitedCustomers);
+        logger.info("Following Customers are invited for Lunch:");
         logger.info("###################################################################");
         for (final CustomerPositionInfo customer : invitedCustomers) {
             logger.info("UserId: {}, Name: {}", customer.getUserId(), customer.getName());

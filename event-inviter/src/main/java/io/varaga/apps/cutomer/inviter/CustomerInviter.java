@@ -18,7 +18,8 @@ import io.varaga.apps.utils.geo.GeoUtils;
 
 /**
  * This class is resonsible to find those customers that are within the certain distance as specified by the calling application. The class performs
- * multiple key functions. It groups customers based on hash key generated using GeoHashing technique. It sorts those customers based on userId.
+ * multiple key functions. It maps the customers to a grid based on hash key. An event location is mapped to a grid key. Event's grid key is looked up in the cache, to find those customers
+ * that are within this grid. Distance computation applied with the subset of customers in the grid. It sorts those customers based on userId.
  *
  */
 public class CustomerInviter {
@@ -54,8 +55,8 @@ public class CustomerInviter {
 
         final List<CustomerPositionInfo> customersPositions = CustomerFileReaderUtils
                 .readCustomerPositionFromJsonFile(inviterArgs.getCustomersFileInputStream());
-        // arrange the customer into a grid.
-        groupCustomersIntoHashes(customersPositions);
+        // map the customer into a grid.
+        mapCustomersToGridKey(customersPositions);
         logger.info("Customers are grouped");
         //get the event location (GPS coordinate)
         final GeoLocation eventLocation = GeoLocation.fromDegrees(inviterArgs.getInvitingLocationLat(), inviterArgs.getInvitingLocationLong());
@@ -75,7 +76,7 @@ public class CustomerInviter {
      * @param customerList
      *            - the list of customers that are to be determined for the invite.
      */
-    private void groupCustomersIntoHashes(final List<CustomerPositionInfo> customerList) {
+    private void mapCustomersToGridKey(final List<CustomerPositionInfo> customerList) {
         for (final CustomerPositionInfo custPosition : customerList) {
             // get the grid key, bounding box with 100 KM, for this customer.
             final String hash = GeoUtils.getCellHashGroupFor100KMs(custPosition.getLatitude(), custPosition.getLongitude());

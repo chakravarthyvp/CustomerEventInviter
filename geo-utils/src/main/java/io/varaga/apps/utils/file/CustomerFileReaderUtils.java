@@ -13,7 +13,7 @@ import io.apps.events.model.CustomerPositionInfo;
  *
  * @TODO - This class can refactor to read the file and update a cache dynamically, listen for changes in the file system and load new files etc.,
  */
-public class CustomerFileReaderUtils {
+public class CustomerFileReaderUtils<T> {
 
     private CustomerFileReaderUtils() {
     }
